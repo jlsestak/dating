@@ -1,5 +1,9 @@
 <?php
-//this is my controller
+/*
+ * Jessica Sestak
+ * 01/24/2021
+ * This is the controller page for Jessica's Online Dating service for people who like cats
+ */
 
 ini_set('display_errors',1);
 error_reporting(E_ALL);
