@@ -25,18 +25,50 @@ $f3->route('GET /', function(){
     echo $view->render('views/home.html');
 }
 );
-
 //order route
-$f3->route('GET /profile', function(){
+$f3->route('GET /personal', function(){
     //echo "Order Page";
     $view = new Template();
-  //  echo $view->render('views/profile.html');
-    echo "Profile";
+    echo $view->render('views/personal.html');
+
+});
+
+//order route
+$f3->route('POST /profile', function(){
+    if(isset($_POST['fname'])){
+        $_SESSION['fname'] = $_POST['fname'];
+    }
+    if(isset($_POST['lname'])){
+        $_SESSION['lname'] = $_POST['lname'];
+    }
+    if(isset($_POST['age'])){
+        $_SESSION['age'] = $_POST['age'];
+    }
+    if(isset($_POST['gender'])){
+        $_SESSION['gender'] = $_POST['gender'];
+    }
+    if(isset($_POST['phone'])){
+        $_SESSION['phone'] = $_POST['phone'];
+    }
+    $view = new Template();
+    echo $view->render('views/profile.html');
+
 });
 
 //order2 route
 $f3->route('POST /interests', function(){
-
+    if(isset($_POST['email'])){
+        $_SESSION['email'] = $_POST['email'];
+    }
+    if(isset($_POST['state'])){
+        $_SESSION['state'] = $_POST['state'];
+    }
+    if(isset($_POST['seeking'])) {
+        $_SESSION['seeking'] = $_POST['seeking'];
+    }
+    if(isset($_POST['biography'])){
+        $_SESSION['biography'] = $_POST['biography'];
+    }
 
     //display a view
     $view = new Template();
@@ -45,7 +77,9 @@ $f3->route('POST /interests', function(){
 });
 
 $f3->route('POST /summary', function(){
-
+    if(isset($_POST['interests'])){
+        $_SESSION['interests'] = $_POST['interests'];
+    }
 
     //display a view
     $view = new Template();
