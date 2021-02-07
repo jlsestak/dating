@@ -1,0 +1,68 @@
+<!--
+Jessica Sestak
+01/24/2021
+This is where users put in their profile information
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet">
+    <link href="styles/styles.css" rel="stylesheet">
+    <title>Dating Website</title>
+</head>
+<body>
+<!--Navbar -->
+<nav class="navbar"><a class="navbar-brand" href="home">Jessica's Dating Services</a></nav>
+<h1>Profile</h1><hr>
+<!--Jessica's Dating Website Information -->
+<div class="container info">
+    <!--Form-->
+    <form action="interests" method="post">
+    <!--Row -->
+    <div class="row">
+        <!--Profile Information -->
+        <div class="col">
+            <!--Email -->
+            <label for="email">Email</label>
+            <input class="form-control" id="email" name="email" type="text">
+            <!--Email -->
+            <label for="state">State</label>
+            <input class="form-control" id="state" name="state" type="text"><br>
+            <label>Seeking</label><br>
+            <label class="radio-inline">
+                <input type="radio" name="seeking" checked> &nbsp Female &ensp;
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="seeking">&nbsp Male
+            </label>
+            <br><br>
+
+        </div>
+        <!--Image of cats -->
+        <div class="col">
+            <div class="form-group">
+                <label for="biography">Biography</label>
+                <textarea class="form-control" id="biography" rows="4"></textarea>
+            </div>
+        </div>
+        <div class=" text-right buttonBottom">
+            <button class="btn btn-secondary btn-lg ml-2" type="submit">Next ></button>
+        </div>
+    </div><!--END OF ROW-->
+    </form>
+</div><!--END OF CONTAINER-->
+<!--Scripts-->
+<script crossorigin="anonymous" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
