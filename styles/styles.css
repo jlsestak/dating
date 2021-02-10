@@ -1,6 +1,11 @@
-img {
+.arty {
     width: 100%;
     margin-left: 10px;
+}
+.profilePic {
+    width:70%;
+    margin-bottom:20px;
+
 }
 
 body {
@@ -20,4 +25,12 @@ a {
     margin-top: 80px;
     margin-bottom:20px;
 }
+
+.buttonBottom {
+!important;
+    position: absolute;
+    bottom:40px;
+    right:40px;
+}
+
 
