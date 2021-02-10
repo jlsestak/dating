@@ -1,7 +1,7 @@
 <!--
 Jessica Sestak
-01/24/2021
-This is the Home page to Jessica's "people who like cats" dating service
+02/09/2021
+This is the page the user inputs their interests
 -->
 
 <!doctype html>
@@ -22,80 +22,84 @@ This is the Home page to Jessica's "people who like cats" dating service
 <!--Jessica's Dating Website Information -->
 
 <div class="container">
-    <h1>Interests</h1><hr>
+    <h1>Interests</h1>
+    <hr>
     <!--Form-->
     <form action="summary" method="post">
-
-            <h4>Indoor Interests</h4>
-            <div class = "row">
-                <div class="col">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="tv" id="tv" name = "interests">
-                        <label class="form-check-label" for="tv">
-                            tv
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="puzzles" id="puzzles" name = "interests">
-                        <label class="form-check-label" for="puzzles">
-                            puzzles
-                        </label>
-                    </div>
-                </div><!--Column end -->
-                <div class="col">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="movies" id="movies" name = "interests">
-                        <label class="form-check-label" for="movies">
-                            movies
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="reading" id="reading" name = "interests">
-                        <label class="form-check-label" for="reading">
-                            reading
-                        </label>
-                    </div>
-                </div><!--Column end -->
-                <div class="col">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="cooking" id="cooking" name = "interests">
-                        <label class="form-check-label" for="cooking">
-                            cooking
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="playing cards" id="cards" name = "interests">
-                        <label class="form-check-label" for="cards">
-                            playing cards
-                        </label>
-                    </div>
-                </div><!--Column end -->
-                <div class="col">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="board games" id="boardGames" name = "interests">
-                        <label class="form-check-label" for="boardGames">
-                            board games
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="video games" id="videoGames" name = "interests">
-                        <label class="form-check-label" for="videoGames">
-                            Video Games
-                        </label>
-                    </div>
-                </div><!--Column end -->
-        </div><!--Row end --><br>
-        <h4>Outdoor Interests</h4>
-        <div class = "row">
+        <!--Indoor Interests -->
+        <h4>Indoor Interests</h4>
+        <div class="row">
             <div class="col">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="hiking" id="hiking" name = "interests">
+                    <input class="form-check-input" type="checkbox" value="tv" id="tv" name="interests[]">
+                    <label class="form-check-label" for="tv">
+                        tv
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="puzzles" id="puzzles" name="interests[]">
+                    <label class="form-check-label" for="puzzles">
+                        puzzles
+                    </label>
+                </div>
+            </div><!--Column end -->
+            <div class="col">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="movies" id="movies" name="interests[]">
+                    <label class="form-check-label" for="movies">
+                        movies
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="reading" id="reading" name="interests[]">
+                    <label class="form-check-label" for="reading">
+                        reading
+                    </label>
+                </div>
+            </div><!--Column end -->
+            <div class="col">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="cooking" id="cooking" name="interests[]">
+                    <label class="form-check-label" for="cooking">
+                        cooking
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="playing cards" id="cards" name="interests[]">
+                    <label class="form-check-label" for="cards">
+                        playing cards
+                    </label>
+                </div>
+            </div><!--Column end -->
+            <div class="col">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="board games" id="boardGames"
+                           name="interests[]">
+                    <label class="form-check-label" for="boardGames">
+                        board games
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="video games" id="videoGames"
+                           name="interests[]">
+                    <label class="form-check-label" for="videoGames">
+                        Video Games
+                    </label>
+                </div>
+            </div><!--Column end -->
+        </div><!--Row end --><br>
+        <!--Outdoor Interests -->
+        <h4>Outdoor Interests</h4>
+        <div class="row">
+            <div class="col">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="hiking" id="hiking" name="interests[]">
                     <label class="form-check-label" for="hiking">
                         hiking
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="walking" id="walking" name = "interests">
+                    <input class="form-check-input" type="checkbox" value="walking" id="walking" name="interests[]">
                     <label class="form-check-label" for="walking">
                         walking
                     </label>
@@ -103,13 +107,13 @@ This is the Home page to Jessica's "people who like cats" dating service
             </div><!--Column end -->
             <div class="col">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="biking" id="biking" name = "interests">
+                    <input class="form-check-input" type="checkbox" value="biking" id="biking" name="interests[]">
                     <label class="form-check-label" for="biking">
                         biking
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="climbing" id="climbing" name = "interests">
+                    <input class="form-check-input" type="checkbox" value="climbing" id="climbing" name="interests[]">
                     <label class="form-check-label" for="climbing">
                         climbing
                     </label>
@@ -117,13 +121,13 @@ This is the Home page to Jessica's "people who like cats" dating service
             </div><!--Column end -->
             <div class="col">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="swimming" id="swimming" name = "interests">
+                    <input class="form-check-input" type="checkbox" value="swimming" id="swimming" name="interests[]">
                     <label class="form-check-label" for="swimming">
                         swimming
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="camping" id="camping" name = "interests">
+                    <input class="form-check-input" type="checkbox" value="camping" id="camping" name="interests[]">
                     <label class="form-check-label" for="camping">
                         camping
                     </label>
@@ -131,13 +135,13 @@ This is the Home page to Jessica's "people who like cats" dating service
             </div><!--Column end -->
             <div class="col">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="skiing" id="skiing" name = "interests">
+                    <input class="form-check-input" type="checkbox" value="skiing" id="skiing" name="interests[]">
                     <label class="form-check-label" for="skiing">
                         skiing
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="rafting" id="rafting" name = "interests">
+                    <input class="form-check-input" type="checkbox" value="rafting" id="rafting" name="interests[]">
                     <label class="form-check-label" for="rafting">
                         rafting
                     </label>

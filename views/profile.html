@@ -1,7 +1,7 @@
 <!--
 Jessica Sestak
-01/24/2021
-This is where users put in their profile information
+02/09/2021
+This is where users puts in their profile information
 -->
 
 <!doctype html>
@@ -18,10 +18,11 @@ This is where users put in their profile information
 </head>
 <body>
 <!--Navbar -->
-<nav class="navbar"><a class="navbar-brand" href="home">Jessica's Dating Services</a></nav>
-<h1>Profile</h1><hr>
+<nav class="navbar"><a class="navbar-brand" href="/328/dating">Jessica's Dating Services</a></nav>
+
 <!--Jessica's Dating Website Information -->
-<div class="container info">
+<div class="container">
+    <h1>Profile</h1><hr>
     <!--Form-->
     <form action="interests" method="post">
     <!--Row -->
@@ -36,10 +37,10 @@ This is where users put in their profile information
             <input class="form-control" id="state" name="state" type="text"><br>
             <label>Seeking</label><br>
             <label class="radio-inline">
-                <input type="radio" name="seeking" checked> &nbsp Female &ensp;
+                <input type="radio" name="seeking"  value ="female" checked> &nbsp; Female &ensp;
             </label>
             <label class="radio-inline">
-                <input type="radio" name="seeking">&nbsp Male
+                <input type="radio" name="seeking" value = "male">&nbsp; Male
             </label>
             <br><br>
 
@@ -48,7 +49,7 @@ This is where users put in their profile information
         <div class="col">
             <div class="form-group">
                 <label for="biography">Biography</label>
-                <textarea class="form-control" id="biography" rows="4"></textarea>
+                <textarea class="form-control" id="biography" name= "biography" rows="4"></textarea>
             </div>
         </div>
         <div class=" text-right buttonBottom">

@@ -1,7 +1,7 @@
 <!--
 Jessica Sestak
-01/24/2021
-This is the Home page to Jessica's "people who like cats" dating service
+02/09/2021
+This is the where the user puts in their personal information for Jessica's Dating Website
 -->
 <!doctype html>
 <html lang="en">
@@ -20,33 +20,39 @@ This is the Home page to Jessica's "people who like cats" dating service
 <nav class="navbar"><a class="navbar-brand" href="/328/dating">Jessica's Dating Services</a></nav>
 <div class="container">
     <h1>Personal Information</h1>
+    <hr>
+    <!--Form -->
     <form action="profile" method="post">
-
-
-           <div class = "w-75">
-                <label for="fname">First Name</label>
-                <input class="form-control" id="fname" name="fname" type="text">
-
-                <label for="lname">Last Name</label>
-                <input class="form-control" id="lname" name="lname" type="text">
-                <label for="age">Age</label>
-                <input class="form-control" id="age" name="age" type="text">
-               <br>
-               <label>Gender</label><br>
-               <label class="radio-inline">
-                   <input type="radio" name="gender" checked>Female &ensp;
-               </label>
-               <label class="radio-inline">
-                   <input type="radio" name="gender">Male
-               </label>
-                <br><br>
-               <label for="phone">Phone Number</label>
-               <input class="form-control" id="phone" name="phone" type="text">
-           </div>
+        <!--Personal information input -->
+        <div class="w-75">
+            <!--First Name -->
+            <label for="fname">First Name</label>
+            <input class="form-control" id="fname" name="fname" type="text">
+            <!--Last Name-->
+            <label for="lname">Last Name</label>
+            <input class="form-control" id="lname" name="lname" type="text">
+            <!--Age -->
+            <label for="age">Age</label>
+            <input class="form-control" id="age" name="age" type="text">
+            <br>
+            <!--Gender radio buttons-->
+            <label>Gender</label><br>
+            <label class="radio-inline">
+                <input type="radio" name="gender" value="female" checked>&nbsp; Female &ensp;&ensp;
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="gender" value="male">&nbsp; Male
+            </label>
+            <br><br>
+            <!--Phone Number -->
+            <label for="phone">Phone Number</label>
+            <input class="form-control" id="phone" name="phone" type="text">
+        </div>
 
         <br><br>
+        <!--Submit button -->
         <div class=" text-right buttonBottom">
-        <button class="btn btn-secondary btn-lg ml-2" type="submit">Next ></button>
+            <button class="btn btn-secondary btn-lg ml-2" type="submit">Next ></button>
         </div>
 
 
