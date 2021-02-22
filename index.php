@@ -11,8 +11,12 @@ error_reporting(E_ALL);
 //Start a session
 session_start();
 
-//require the autoload file
+//require files
 require_once('vendor/autoload.php');
+require_once('model/data-layer.php');
+require_once('model/validation.php');
+
+
 
 //create an instance of the base class
 $f3 = Base::instance();
@@ -26,7 +30,60 @@ $f3->route('GET /', function () {
 }
 );
 //order route
-$f3->route('GET /personal', function () {
+$f3->route('GET|POST /personal', function ($f3) {
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        $fname = trim($_POST['fname']);
+        $lname = trim($_POST['lname']);
+        $age = trim($_POST['age']);
+        $gender = $_POST['gender'];
+        $phone = $_POST['phone'];
+
+        //Save first name to session if valid
+        if (validName($fname)) {
+            $_SESSION['fname'] = $_POST['fname'];
+        }
+        else if($fname ==""){
+            $f3->set('errors["fname"]', "First Name cannot be blank");
+        }
+        else {
+            $f3->set('errors["fname"]', "First Name must contain only alphabetic characters");
+        }
+        //Save last name to session if valid
+        if (validName($lname)) {
+            $_SESSION['lname'] = $_POST['lname'];
+        }
+        else if($lname == ""){
+
+            $f3->set('errors["lname"]', "Last Name cannot be blank");
+        }
+        else {
+            $f3->set('errors["lname"]', "Last name must contain only alphabetic characters");
+        }
+
+
+        //save age to session
+        if (isset($_POST['age'])) {
+            $_SESSION['age'] = $_POST['age'];
+        }
+        //save gender to session
+        if (isset($_POST['gender'])) {
+            $_SESSION['gender'] = $_POST['gender'];
+        }
+        //save phone to session
+        if (isset($_POST['phone'])) {
+            $_SESSION['phone'] = $_POST['phone'];
+        }
+
+        //If there are no errors, redirect to /profile
+        if(empty($f3->get('errors'))) {
+            $f3->reroute('/profile');
+        }
+
+    }
+    $f3 ->set('userFirstName', isset($fname) ? $fname : "");
+    $f3 ->set('userLastName', isset($lname) ? $lname : "");
     //echo "Order Page";
     $view = new Template();
     echo $view->render('views/personal.html');
@@ -34,35 +91,19 @@ $f3->route('GET /personal', function () {
 });
 
 //order route
-$f3->route('POST /profile', function () {
-    //Save first name to session
-    if (isset($_POST['fname'])) {
-        $_SESSION['fname'] = $_POST['fname'];
-    }
-    //Save last name to session
-    if (isset($_POST['lname'])) {
-        $_SESSION['lname'] = $_POST['lname'];
-    }
-    //save age to session
-    if (isset($_POST['age'])) {
-        $_SESSION['age'] = $_POST['age'];
-    }
-    //save gender to session
-    if (isset($_POST['gender'])) {
-        $_SESSION['gender'] = $_POST['gender'];
-    }
-    //save phone to session
-    if (isset($_POST['phone'])) {
-        $_SESSION['phone'] = $_POST['phone'];
-    }
+$f3->route('GET|POST /profile', function () {
+
     //display profile view
     $view = new Template();
     echo $view->render('views/profile.html');
 
 });
 
-//order2 route
-$f3->route('POST /interests', function () {
+//interests route
+$f3->route('GET|POST /interests', function ($f3) {
+
+    $f3->set('indoor', getIndoorInterests());
+    $f3->set('outdoor', getOutdoorInterests());
     //save email to session
     if (isset($_POST['email'])) {
         $_SESSION['email'] = $_POST['email'];
@@ -86,7 +127,7 @@ $f3->route('POST /interests', function () {
 
 });
 
-$f3->route('POST /summary', function () {
+$f3->route('GET|POST /summary', function () {
 
     //save interests to session
     if (isset($_POST['interests'])) {
