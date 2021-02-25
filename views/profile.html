@@ -31,17 +31,21 @@ This is where users puts in their profile information
         <div class="col">
             <!--Email -->
             <label for="email">Email</label>
-            <input class="form-control" id="email" name="email" type="text">
+            <input class="form-control" id="email" name="email" type="text" value="{{@userEmail}}">
+            <check if=" {{ isset(@errors['email'])}}">
+                {{@errors['email']}}<br>
+            </check>
             <!--Email -->
             <label for="state">State</label>
-            <input class="form-control" id="state" name="state" type="text"><br>
+            <input class="form-control" id="state" name="state" type="text" value="{{@userState}}">
+
             <label>Seeking</label><br>
-            <label class="radio-inline">
-                <input type="radio" name="seeking"  value ="female" checked> &nbsp; Female &ensp;
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="seeking" value = "male">&nbsp; Male
-            </label>
+            <repeat group="{{@seekingGender}}" value="{{@seeking}}">
+                <label class="radio-inline">
+                    <input type="radio" name="seeking" id="{{@seeking}}" value="{{@seeking}}"
+                    <check if="{{@userSeeking==@seeking}}">checked</check>>&nbsp;{{@seeking}}&ensp;&ensp;
+                </label>
+            </repeat>
             <br><br>
 
         </div>
@@ -49,7 +53,7 @@ This is where users puts in their profile information
         <div class="col">
             <div class="form-group">
                 <label for="biography">Biography</label>
-                <textarea class="form-control" id="biography" name= "biography" rows="4"></textarea>
+                <textarea class="form-control" id="biography" name= "biography" rows="4">{{@userBio}}</textarea>
             </div>
         </div>
         <div class=" text-right buttonBottom">
