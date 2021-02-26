@@ -31,13 +31,13 @@ $f3->route('GET /', function () {
 );
 //order route
 $f3->route('GET|POST /personal', function ($f3) {
-
+    $f3->set('genders', getGender());
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $fname = trim($_POST['fname']);
         $lname = trim($_POST['lname']);
         $age = trim($_POST['age']);
-        $gender = $_POST['gender'];
+        $gender = $_POST['genders'];
         $phone = $_POST['phone'];
 
         //Save first name to session if valid
@@ -62,18 +62,38 @@ $f3->route('GET|POST /personal', function ($f3) {
             $f3->set('errors["lname"]', "Last name must contain only alphabetic characters");
         }
 
-
-        //save age to session
-        if (isset($_POST['age'])) {
+        //Save age if valid
+        if (validAge($age)) {
             $_SESSION['age'] = $_POST['age'];
         }
-        //save gender to session
-        if (isset($_POST['gender'])) {
-            $_SESSION['gender'] = $_POST['gender'];
+        else if(!is_numeric($age)) {
+            $f3->set('errors["age"]', "Please enter a numeric value for age");
         }
+        else if($age == "") {
+            $f3->set('errors["age"]', "Age cannot be blank");
+        }
+        else if($age < 18){
+
+            $f3->set('errors["age"]', "Come back when you are an adult");
+        }
+        else {
+            $f3->set('errors["age"]', "Congratulations on your milestone, 
+            but we are not an inclusive dating site. Sorry!");
+        }
+        //save gender to session
+        if (isset($_POST['genders'])) {
+            $_SESSION['gender'] = $_POST['genders'];
+        }
+
         //save phone to session
-        if (isset($_POST['phone'])) {
+        if (validPhone($phone)) {
             $_SESSION['phone'] = $_POST['phone'];
+        }
+        else if($phone == "") {
+            $f3->set('errors["phone"]', "Phone number cannot be blank");
+        }
+        else {
+            $f3->set('errors["phone"]', "Please put a valid phone number (XXX-XXX-XXXX)");
         }
 
         //If there are no errors, redirect to /profile
@@ -84,6 +104,9 @@ $f3->route('GET|POST /personal', function ($f3) {
     }
     $f3 ->set('userFirstName', isset($fname) ? $fname : "");
     $f3 ->set('userLastName', isset($lname) ? $lname : "");
+    $f3 ->set('userAge', isset($age) ? $age : "");
+    $f3 ->set('userGender', isset($gender) ? $gender : "");
+    $f3 ->set('userPhone', isset($phone) ? $phone : "");
     //echo "Order Page";
     $view = new Template();
     echo $view->render('views/personal.html');
@@ -91,22 +114,23 @@ $f3->route('GET|POST /personal', function ($f3) {
 });
 
 //order route
-$f3->route('GET|POST /profile', function () {
+$f3->route('GET|POST /profile', function ($f3) {
+    $f3->set('seekingGender', getGender());
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $email = $_POST['email'];
+        $seeking = $_POST['seeking'];
+        $biography = $_POST['biography'];
+        $state = $_POST['state'];
 
-    //display profile view
-    $view = new Template();
-    echo $view->render('views/profile.html');
-
-});
-
-//interests route
-$f3->route('GET|POST /interests', function ($f3) {
-
-    $f3->set('indoor', getIndoorInterests());
-    $f3->set('outdoor', getOutdoorInterests());
-    //save email to session
-    if (isset($_POST['email'])) {
+        //save email to session
+    if (validEmail($email)) {
         $_SESSION['email'] = $_POST['email'];
+    }
+    else if($email == "") {
+        $f3->set('errors["email"]', "Email cannot be blank");
+    }
+    else {
+        $f3->set('errors["email"]', "Please give a valid email");
     }
     //save state to session
     if (isset($_POST['state'])) {
@@ -120,25 +144,69 @@ $f3->route('GET|POST /interests', function ($f3) {
     if (isset($_POST['biography'])) {
         $_SESSION['biography'] = $_POST['biography'];
     }
+        //If there are no errors, redirect to /profile
+        if(empty($f3->get('errors'))) {
+            $f3->reroute('/interests');
+        }
+    }
+    $f3 ->set('userEmail', isset($email) ? $email : "");
+    $f3 ->set('userSeeking', isset($seeking) ? $seeking : "");
+    $f3 ->set('userState', isset($state) ? $state : "");
+    $f3 ->set('userBio', isset($biography) ? $biography : "");
+    //display profile view
+    $view = new Template();
+    echo $view->render('views/profile.html');
 
+});
+
+//interests route
+$f3->route('GET|POST /interests', function ($f3) {
+
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        //
+        $indoorInterests = $_POST['indoorInterests'];
+        $outdoorInterests = $_POST['outdoorInterests'];
+        if(isset($_POST['indoorInterests'])) {
+            if (validIndoor($indoorInterests)) {
+                $indoorInterests = implode(", ", $indoorInterests);
+                $_SESSION['indoorInterests'] = $indoorInterests;
+            } else {
+                $f3->set('errors["indoors"]', "Please select a valid indoor interest");
+            }
+        }
+        if(isset($outdoorInterests)) {
+            if(validOutdoor($outdoorInterests)) {
+                $outdoorInterests = implode(", ",$outdoorInterests);
+                $_SESSION['outdoorInterests'] = $outdoorInterests;
+            }
+            else {
+                $f3->set('errors["outdoors"]', "Please select a valid outdoor interest");
+            }
+        }
+
+        //If there are no errors, redirect to /profile
+        if(empty($f3->get('errors'))) {
+            $f3->reroute('/summary');
+        }
+
+    }
+    $f3->set('indoor', getIndoorInterests());
+    $f3->set('outdoor', getOutdoorInterests());
     //display interests view
     $view = new Template();
     echo $view->render('views/interests.html');
 
 });
 
-$f3->route('GET|POST /summary', function () {
+$f3->route('GET /summary', function () {
 
-    //save interests to session
-    if (isset($_POST['interests'])) {
-        $interest = $_POST['interests'];
-        $_SESSION['interests'] = implode(", ", $interest);
-
-    }
 
     //display summary view
     $view = new Template();
     echo $view->render('views/summary.html');
+
+    session_destroy();
 
 });
 
