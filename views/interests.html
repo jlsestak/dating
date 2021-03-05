@@ -33,8 +33,7 @@ This is the page the user inputs their interests
         <repeat group = "{{@indoor}}" value="{{@indoorInterest}}">
             <div class="col">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="{{@indoorInterest}}" name="indoorInterests[]">
-                    <label class="form-check-label">
+                    <label class="form-check-label"><input class="form-check-input" type="checkbox" value="{{@indoorInterest}}" name="indoorInterests[]">
                         {{@indoorInterest}}
                     </label>
                 </div>
@@ -48,8 +47,7 @@ This is the page the user inputs their interests
             <repeat group = "{{@outdoor}}" value="{{@outdoorInterest}}">
                 <div class="col">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{@outdoorInterest}}" name="outdoorInterests[]">
-                        <label class="form-check-label">
+                        <label class="form-check-label"><input class="form-check-input" type="checkbox" value="{{@outdoorInterest}}" name="outdoorInterests[]">
                             {{@outdoorInterest}}
                         </label>
                     </div>

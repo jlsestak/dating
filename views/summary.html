@@ -23,7 +23,7 @@ This is the user's summary page that displays their information
 <!--Jessica's Dating Website Information -->
 <div class="container info">
     <!--Form-->
-    <form action="#" method="post">
+    <form>
         <!--Row -->
         <div class="row">
             <!--Profile Information -->
@@ -31,28 +31,28 @@ This is the user's summary page that displays their information
                 <div class="border border-secondary rounded ">
                     <div class="ml-2 mt-2">
                         <!--Name -->
-                        <h5>Name: {{@SESSION.fname}} {{@SESSION.lname}}</h5>
+                        <h5>Name: {{@SESSION.memberRank->getFName()}} {{@SESSION.memberRank->getLName()}}</h5>
                         <hr>
                         <!--Gender -->
-                        <h5>Gender: {{@SESSION.gender}}</h5>
+                        <h5>Gender: {{@SESSION.memberRank->getGender()}}</h5>
                         <hr>
                         <!--Age -->
-                        <h5>Age: {{@SESSION.age}}</h5>
+                        <h5>Age: {{@SESSION.memberRank->getAge()}}</h5>
                         <hr>
                         <!--Phone -->
-                        <h5>Phone: {{@SESSION.phone}}</h5>
+                        <h5>Phone: {{@SESSION.memberRank->getPhone()}}</h5>
                         <hr>
                         <!--Email -->
-                        <h5>Email: {{@SESSION.email}}</h5>
+                        <h5>Email: {{@SESSION.memberRank->getEmail()}}</h5>
                         <hr>
                         <!--State -->
-                        <h5>State: {{@SESSION.state}}</h5>
+                        <h5>State: {{@SESSION.memberRank->getState()}}</h5>
                         <hr>
                         <!--Seeking -->
-                        <h5>Seeking: {{@SESSION.seeking}}</h5>
+                        <h5>Seeking: {{@SESSION.memberRank->getSeeking()}}</h5>
                         <hr>
                         <!--Interests -->
-                        <h5>Interests: {{@SESSION.interests}}</h5>
+                        <h5>Interests: {{@SESSION.memberRank->getIndoorInterests()}}<br>{{@SESSION.memberRank->getOutdoorInterests()}}</h5>
                     </div>
                 </div>
             </div>
