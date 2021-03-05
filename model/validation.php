@@ -65,7 +65,8 @@ class Validate
      */
     function validOutdoor($outdoor)
     {
-        $validOutdoor = getOutdoorInterests();
+        global $datalayer;
+        $validOutdoor = $datalayer->getOutdoorInterests();
         foreach ($outdoor as $outdoorInterests) {
 
             if (!in_array($outdoorInterests, $validOutdoor)) {
@@ -82,7 +83,8 @@ class Validate
      */
     function validIndoor($indoor)
     {
-        $validIndoor = getIndoorInterests();
+        global $datalayer;
+        $validIndoor = $datalayer->getIndoorInterests();
         foreach ($indoor as $indoorInterests) {
             if (!in_array($indoorInterests, $validIndoor)) {
                 return false;
