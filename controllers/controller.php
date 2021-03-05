@@ -3,7 +3,6 @@
 class Controller
 {
     private $_f3;
-    private $_memberRank;
 
     function __construct($f3)
     {
@@ -21,7 +20,6 @@ class Controller
     /*Display personal page */
     function personal()
     {
-        global $_memberRank;
         global $validator;
         global $datalayer;
 
@@ -40,7 +38,7 @@ class Controller
 
             //Save first name to session if valid
             if ($validator->validName($fname)) {
-                $fname = $_POST['fname'];
+                $_SESSION['fname'] = $_POST['fname'];
             }
             else if($fname ==""){
                 $this->_f3->set('errors["fname"]', "First Name cannot be blank");
@@ -51,7 +49,7 @@ class Controller
 
             //Save last name to session if valid
             if ($validator->validName($lname)) {
-                $lname = $_POST['lname'];
+                $_SESSION['lname'] = $_POST['lname'];
             }
             else if($lname == ""){
 
@@ -104,12 +102,12 @@ class Controller
             //If there are no errors, redirect to /profile
             if(empty($this->_f3->get('errors'))) {
                 if($_SESSION['premiumMember']){
-                    $_memberRank = new PremiumMember($fname, $lname, $age, $gender, $phone);
+                    $memberRank = new PremiumMember($fname, $lname, $age, $gender, $phone);
                 }
                 else {
-                    $_memberRank = new Member($fname, $lname, $age, $gender, $phone);
+                    $memberRank = new Member($fname, $lname, $age, $gender, $phone);
                 }
-                $_SESSION['memberRank'] = $_memberRank;
+                $_SESSION['$memberRank'] = $memberRank;
                 $this->_f3->reroute('profile');
             }
 
@@ -129,7 +127,6 @@ class Controller
 
     function profile()
     {
-        global $_memberRank;
         global $datalayer;
         global $validator;
         //send the gender array to the profile page
@@ -171,10 +168,10 @@ class Controller
             //If there are no errors, redirect to /profile
             if (empty($this->_f3->get('errors'))) {
                 //store the data in an object
-                $_memberRank->setEmail($email);
-                $_memberRank->setState($state);
-                $_memberRank->setSeeking($seeking);
-                $_memberRank->setBio($biography);
+                $_SESSION['memberRank']->setEmail($email);
+                $_SESSION['memberRank']->setState($state);
+                $_SESSION['memberRank']->setSeeking($seeking);
+                $_SESSION['memberRank']->setBio($biography);
                 $this->_f3->reroute('interests');
             }
 
@@ -195,7 +192,6 @@ class Controller
         if(!$_SESSION['premiumMember']) {
             $this->_f3->reroute('/summary');
         }
-        global $_memberRank;
         global $validator;
         global $datalayer;
         //Check to see if the user has submitted the interest page
@@ -226,8 +222,8 @@ class Controller
                 }
             }
             //store the data in an object
-            $_memberRank->setIndoorInterests($indoorInterests);
-            $_memberRank->setOutdoorInterests($outdoorInterests);
+            $_SESSION['memberRank']->setIndoorInterests($indoorInterests);
+            $_SESSION['memberRank']->setOutdoorInterests($outdoorInterests);
 
 
             //If there are no errors, redirect to /profile
