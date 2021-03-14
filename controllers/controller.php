@@ -3,10 +3,15 @@
 class Controller
 {
     private $_f3;
+    private $_member;
+    private $_premium;
+
 
     function __construct($f3)
     {
         $this->_f3 = $f3;
+        $this->_member = new Member("","",0,"","");
+        $this->premium = new PremiumMember("","",0,"","");
     }
 
     /** Display home page */
@@ -20,6 +25,7 @@ class Controller
     /*Display personal page */
     function personal()
     {
+
         global $validator;
         global $datalayer;
 
@@ -101,13 +107,14 @@ class Controller
 
             //If there are no errors, redirect to /profile
             if(empty($this->_f3->get('errors'))) {
-                if($_SESSION['premiumMember']){
-                    $memberRank = new PremiumMember($fname, $lname, $age, $gender, $phone);
+                if(isset($_POST['premiumMember'])){
+                    $this->_premium = new PremiumMember($fname, $lname, $age, $gender, $phone);
+                    $_SESSION['memberRank'] = $this->_premium;
                 }
                 else {
-                    $memberRank = new Member($fname, $lname, $age, $gender, $phone);
+                    $this->_member = new Member($fname, $lname, $age, $gender, $phone);
+                    $_SESSION['memberRank'] = $this->_member;
                 }
-                $_SESSION['$memberRank'] = $memberRank;
                 $this->_f3->reroute('profile');
             }
 
@@ -119,7 +126,7 @@ class Controller
         $this->_f3->set('userAge', isset($age) ? $age : "");
         $this->_f3->set('userGender', isset($gender) ? $gender : "");
         $this->_f3->set('userPhone', isset($phone) ? $phone : "");
-        $this->_f3->set('premiumMember', isset($premiumMember) ? $premiumMember : "");
+        $this->_f3->set('premiumMember', isset($this->_premiumMember) ? $this->_premiumMember : "");
 
         $view = new Template();
         echo $view->render('views/personal.html');
@@ -129,6 +136,8 @@ class Controller
     {
         global $datalayer;
         global $validator;
+
+
         //send the gender array to the profile page
         $this->_f3->set('seekingGender', $datalayer->getGender());
 
@@ -172,7 +181,15 @@ class Controller
                 $_SESSION['memberRank']->setState($state);
                 $_SESSION['memberRank']->setSeeking($seeking);
                 $_SESSION['memberRank']->setBio($biography);
-                $this->_f3->reroute('interests');
+                if(!$_SESSION['premiumMember']) {
+                    $this->_member = $_SESSION['memberRank'];
+                    $this->_f3->reroute('/summary');
+                }
+                else{
+                    $this->_premium = $_SESSION['memberRank'];
+                    $this->_f3->reroute('interests');
+                }
+
             }
 
         }
@@ -189,9 +206,8 @@ class Controller
 
     function interests()
     {
-        if(!$_SESSION['premiumMember']) {
-            $this->_f3->reroute('/summary');
-        }
+
+
         global $validator;
         global $datalayer;
         //Check to see if the user has submitted the interest page
@@ -243,9 +259,19 @@ class Controller
 
     function summary()
     {
+
+        global $datalayer;
+       // $premiumCheck = $_SESSION['premiumMember'];
+
+        $datalayer->saveMember();
         //display summary view
         $view = new Template();
         echo $view->render('views/summary.html');
         session_destroy();
+    }
+
+    function admin()
+    {
+
     }
 }
