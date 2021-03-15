@@ -9,9 +9,9 @@ class Validate
 
     private $_dataLayer;
 
-    function __construct()
+    function __construct($_dataLayer)
     {
-        $this->_dataLayer = new DataLayer();
+        $this->_dataLayer = $_dataLayer;
     }
 
     /**
