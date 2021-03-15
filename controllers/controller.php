@@ -263,7 +263,7 @@ class Controller
         global $datalayer;
        // $premiumCheck = $_SESSION['premiumMember'];
 
-        $datalayer->saveMember();
+        $datalayer->insertMember();
         //display summary view
         $view = new Template();
         echo $view->render('views/summary.html');
@@ -272,6 +272,11 @@ class Controller
 
     function admin()
     {
-
+        global $datalayer;
+        $members = $datalayer->getMembers();
+        $this->_f3->set('members', $members);
+        //Display a view
+        $view = new Template();
+        echo $view->render('views/admin.html');
     }
 }
