@@ -1,12 +1,13 @@
 <?php
-/*model/validatate.php
-Contains validation for Jessica's dating site
-
-*/
+/**
+ * @author Jessica Sestak
+ * @Version 1.0
+ * model/validatate.php
+ * Contains validation for Jessica's dating site
+**/
 
 class Validate
 {
-
     private $_dataLayer;
 
     function __construct($_dataLayer)
