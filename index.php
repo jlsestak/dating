@@ -12,16 +12,20 @@ error_reporting(E_ALL);
 
 //require files
 require_once('vendor/autoload.php');
+
+
 //Start a session
 session_start();
 
-
+require $_SERVER['DOCUMENT_ROOT'].'/../config.php';
 
 //Instatiate my classes
 $f3 = Base::instance();
-$datalayer = new DataLayer();
-$validator = new Validate();
+$datalayer = new DataLayer($dbh);
+$validator = new Validate($datalayer);
 $controller = new Controller($f3);
+
+
 
 $f3->set('DEBUG', 3);
 
@@ -60,6 +64,15 @@ $f3->route('GET /summary', function () {
     $controller->summary();
 
 });
+
+//admin route
+$f3->route('GET /admin', function () {
+
+    global $controller;
+    $controller->admin();
+
+});
+
 
 //run fat free
 $f3->run();
