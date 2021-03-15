@@ -18,7 +18,7 @@ This is the user's summary page that displays their information
 </head>
 <body>
 <!--Navbar -->
-<nav class="navbar"><a class="navbar-brand" href="/328/dating">Jessica's Dating Services</a></nav>
+<nav class="navbar"><a class="navbar-brand" href="/328/dating">Jessica's Dating Services</a><a class="navbar-brand" href="admin">Admin</a></nav>
 
 <!--Jessica's Dating Website Information -->
 <div class="container info">
@@ -52,7 +52,7 @@ This is the user's summary page that displays their information
                         <h5>Seeking: {{@SESSION.memberRank->getSeeking()}}</h5>
                         <hr>
                         <!--Interests -->
-                        <h5>Interests: {{@SESSION.memberRank->getIndoorInterests()}}<br>{{@SESSION.memberRank->getOutdoorInterests()}}</h5>
+                        <check if="{{ @SESSION.premiumMember}}"><h5>Interests: {{@SESSION.memberRank->getIndoorInterests()}}<br>{{@SESSION.memberRank->getOutdoorInterests()}}</h5></check>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@ This is the user's summary page that displays their information
                 <img src="images/profile.jpg" alt="Blank Profile picture" class="rounded profilePic"> <br>
                 <!--Biography-->
                 <div class="form-group"><h4>Biography</h4>
-                    <p> {{@SESSION.biography}}</p><br>
+                    <p> {{@SESSION.memberRank->getBio()}}</p><br>
                 </div>
             </div>
 
