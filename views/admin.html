@@ -1,3 +1,8 @@
+<!--
+Jessica Sestak
+03/14/2021
+This is the admin page that displays the members
+-->
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,7 +20,9 @@
 <nav class="navbar"><a class="navbar-brand" href="../dating">Jessica's Dating Services</a><a class="navbar-brand" href="admin">Admin</a></nav>
 <!--Jessica's Dating Website Information -->
 <div class="container" id="main">
+    <!--Table-->
     <table id="guest-table" class="table">
+        <!--Table header-->
         <thead>
         <tr>
             <th scope="col">Member ID</th>
@@ -30,6 +37,7 @@
             <th scope="col">Interests</td>
         </tr>
         </thead>
+        <!-- Table body -->
         <tbody>
         <repeat group="{{@members}}" value="{{@member}}">
             <tr>
